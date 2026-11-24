@@ -1,0 +1,106 @@
+:root {
+  color-scheme: light;
+  --ink: #182b29;
+  --muted: #71817d;
+  --green: #287a62;
+  --green-dark: #1c604c;
+  --line: #e5ebe7;
+  --paper: #ffffff;
+  --canvas: #f5f8f5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--canvas);
+  font-family: 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-header {
+  min-height: 240px;
+  color: white;
+  background: linear-gradient(112deg, #1b4039, #276b56 72%, #32816a);
+}
+
+.header-content, .page-content { width: min(1080px, calc(100% - 48px)); margin: 0 auto; }
+.header-content { padding: 49px 0 55px; }
+.eyebrow { margin: 0 0 10px; color: #91bca9; font-size: 10px; font-weight: 700; letter-spacing: .16em; }
+h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3 { font-family: 'Segoe UI', sans-serif; }
+h1 { margin-bottom: 7px; font-size: clamp(30px, 4vw, 40px); font-weight: 700; letter-spacing: -.04em; }
+.subtitle { margin: 0; color: #c5d9d0; font-size: 14px; }
+.page-content { padding: 43px 0 24px; }
+.intro-row { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 22px; }
+.intro-row .eyebrow, .create-panel .eyebrow { color: var(--green); }
+h2 { margin-bottom: 0; font-size: 23px; letter-spacing: -.035em; }
+.count { display: inline-grid; place-items: center; width: 25px; height: 25px; margin-left: 7px; border-radius: 50%; background: #e4f0e9; color: var(--green-dark); font: 600 12px 'Segoe UI', sans-serif; vertical-align: 3px; }
+.intro-copy { max-width: 300px; margin-bottom: 3px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.warehouse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+.warehouse-card { padding: 22px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); box-shadow: 0 3px 12px #1a34240a; }
+.card-heading { display: flex; align-items: start; justify-content: space-between; }
+.card-heading-actions { display: flex; align-items: center; gap: 13px; }
+.card-heading-actions form { margin: 0; }
+.card-heading .eyebrow { margin-bottom: 6px; color: #86938e; font-size: 9px; }
+h3 { margin: 0; font-size: 17px; letter-spacing: -.025em; }
+.status-dot { width: 9px; height: 9px; margin-top: 7px; border-radius: 50%; background: #58a982; box-shadow: 0 0 0 4px #e9f5ed; }
+.stock-summary { display: flex; align-items: baseline; gap: 7px; margin-top: 24px; }
+.stock-value { font: 700 29px 'Segoe UI', sans-serif; letter-spacing: -.045em; }
+.stock-unit, .capacity { color: var(--muted); font-size: 12px; }
+.capacity { margin-left: auto; }
+.progress-track { height: 6px; margin-top: 10px; overflow: hidden; border-radius: 8px; background: #edf1ed; }
+.progress-fill { display: block; height: 100%; min-width: 0; border-radius: inherit; background: linear-gradient(90deg, #57a77c, #24735b); }
+.capacity-note { margin: 7px 0 20px; color: var(--muted); font-size: 11px; }
+.card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; padding-top: 16px; border-top: 1px solid #edf0ed; }
+label { display: block; margin-bottom: 7px; color: #53635d; font-size: 11px; font-weight: 600; }
+.input-action { display: flex; gap: 5px; }
+input { min-width: 0; width: 100%; height: 36px; padding: 0 9px; border: 1px solid #dfe6e1; border-radius: 5px; outline: none; background: white; color: var(--ink); font: 12px 'Segoe UI', sans-serif; }
+input:focus { border-color: #5b9c7c; box-shadow: 0 0 0 3px #e6f2eb; }
+input::placeholder { color: #a5afaa; }
+button { flex: 0 0 auto; min-height: 36px; padding: 0 12px; border: 0; border-radius: 5px; background: var(--green); color: white; font: 600 11px 'Segoe UI', sans-serif; cursor: pointer; transition: background .15s ease; }
+button:hover { background: var(--green-dark); }
+.secondary-button { border: 1px solid #dfe6e1; background: white; color: #4c5b55; }
+.secondary-button:hover { background: #f0f4f1; color: var(--ink); }
+.delete-button { min-height: 29px; padding: 0 9px; border: 1px solid #eed8d2; background: #fff; color: #9a4936; font-size: 10px; }
+.delete-button:hover { border-color: #dfb8ae; background: #fff5f2; color: #803927; }
+.empty-state { padding: 35px 20px; border: 1px dashed #cad7ce; border-radius: 10px; background: #fbfdfb; text-align: center; }
+.empty-icon { display: grid; place-items: center; width: 38px; height: 38px; margin: 0 auto 12px; border-radius: 50%; background: #e9f3ec; color: var(--green); font-size: 23px; }
+.empty-state h3 { margin-bottom: 5px; }
+.empty-state p { margin: 0; color: var(--muted); font-size: 12px; }
+.create-panel { display: flex; align-items: center; justify-content: space-between; gap: 35px; margin-top: 29px; padding: 24px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.create-copy { flex: 0 0 250px; }
+.create-copy .eyebrow { margin-bottom: 7px; }
+.create-copy h2 { font-size: 19px; }
+.create-copy > p:last-child { margin: 7px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.create-form { display: flex; align-items: end; gap: 10px; flex: 1; }
+.field { flex: 1; }
+.capacity-field { flex: 0 0 130px; }
+.create-form input { height: 39px; }
+.create-button { height: 39px; padding: 0 15px; white-space: nowrap; font-size: 12px; }
+.create-button span { margin-left: 8px; font-size: 16px; vertical-align: -1px; }
+.messages { margin: -17px 0 24px; }
+.message { margin: 0 0 7px; padding: 11px 14px; border: 1px solid; border-radius: 6px; font-size: 12px; }
+.message.success { border-color: #c7e4d1; background: #eff8f1; color: #286344; }
+.message.error { border-color: #f0d1c9; background: #fff5f2; color: #9a4936; }
+footer { padding-top: 27px; color: #99a49e; font-size: 10px; text-align: center; }
+footer span { padding: 0 5px; }
+
+@media (max-width: 720px) {
+  .site-header { min-height: 210px; }
+  .header-content, .page-content { width: min(100% - 32px, 540px); }
+  .header-content { padding-top: 40px; }
+  .page-content { padding-top: 32px; }
+  .intro-row { display: block; }
+  .intro-copy { margin-top: 10px; }
+  .create-panel { align-items: stretch; flex-direction: column; gap: 20px; }
+  .create-copy { flex-basis: auto; }
+}
+
+@media (max-width: 480px) {
+  .card-actions { grid-template-columns: 1fr; }
+  .create-form { align-items: stretch; flex-direction: column; }
+  .capacity-field { flex-basis: auto; }
+  .create-button { width: 100%; }
+}

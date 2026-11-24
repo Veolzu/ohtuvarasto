@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Warehouse manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <p class="eyebrow">INVENTORY CONTROL</p>
+        <h1>Warehouse manager</h1>
+        <p class="subtitle">A clear view of your storage, all in one place.</p>
+      </div>
+    </header>
+
+    <main class="page-content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <section class="messages" aria-live="polite">
+            {% for category, message in messages %}
+              <p class="message {{ category }}">{{ message }}</p>
+            {% endfor %}
+          </section>
+        {% endif %}
+      {% endwith %}
+
+      <section class="intro-row">
+        <div>
+          <p class="eyebrow">YOUR STORAGE</p>
+          <h2>Warehouses <span class="count">{{ warehouses|length }}</span></h2>
+        </div>
+        <p class="intro-copy">Track capacity and stock levels, and keep inventory moving.</p>
+      </section>
+
+      {% if warehouses %}
+        <section class="warehouse-grid" aria-label="Warehouses">
+          {% for warehouse in warehouses %}
+            {% set stock = warehouse.stock %}
+            {% set fill = (stock.saldo / stock.tilavuus * 100)|round|int %}
+            <article class="warehouse-card">
+              <div class="card-heading">
+                <div>
+                  <p class="eyebrow">WAREHOUSE {{ "%02d"|format(warehouse.id) }}</p>
+                  <h3>{{ warehouse.name }}</h3>
+                </div>
+                <div class="card-heading-actions">
+                  <span class="status-dot" aria-label="Active"></span>
+                  <form action="{{ url_for('delete_warehouse', warehouse_id=warehouse.id) }}" method="post">
+                    <button class="delete-button" type="submit" aria-label="Remove {{ warehouse.name }}" title="Remove warehouse">Remove</button>
+                  </form>
+                </div>
+              </div>
+
+              <div class="stock-summary">
+                <span class="stock-value">{{ "%.2f"|format(stock.saldo) }}</span>
+                <span class="stock-unit">in stock</span>
+                <span class="capacity">of {{ "%.2f"|format(stock.tilavuus) }}</span>
+              </div>
+              <div class="progress-track" role="progressbar" aria-label="{{ warehouse.name }} capacity" aria-valuenow="{{ fill }}" aria-valuemin="0" aria-valuemax="100">
+                <span class="progress-fill" style="width: {{ fill }}%"></span>
+              </div>
+              <p class="capacity-note">{{ "%.2f"|format(stock.paljonko_mahtuu()) }} capacity remaining</p>
+
+              <div class="card-actions">
+                <form action="{{ url_for('update_stock', warehouse_id=warehouse.id, action='add') }}" method="post">
+                  <label for="add-{{ warehouse.id }}">Add stock</label>
+                  <div class="input-action">
+                    <input id="add-{{ warehouse.id }}" name="amount" type="number" min="0.01" step="any" placeholder="Amount" required>
+                    <button type="submit">Add</button>
+                  </div>
+                </form>
+                <form action="{{ url_for('update_stock', warehouse_id=warehouse.id, action='take') }}" method="post">
+                  <label for="take-{{ warehouse.id }}">Remove stock</label>
+                  <div class="input-action">
+                    <input id="take-{{ warehouse.id }}" name="amount" type="number" min="0.01" step="any" placeholder="Amount" required>
+                    <button class="secondary-button" type="submit">Remove</button>
+                  </div>
+                </form>
+              </div>
+            </article>
+          {% endfor %}
+        </section>
+      {% else %}
+        <section class="empty-state">
+          <span class="empty-icon" aria-hidden="true">＋</span>
+          <h3>No warehouses yet</h3>
+          <p>Create your first warehouse to start tracking stock.</p>
+        </section>
+      {% endif %}
+
+      <section class="create-panel">
+        <div class="create-copy">
+          <p class="eyebrow">GET STARTED</p>
+          <h2>Create a warehouse</h2>
+          <p>Choose a name and the maximum storage capacity.</p>
+        </div>
+        <form class="create-form" action="{{ url_for('create_warehouse') }}" method="post">
+          <div class="field">
+            <label for="name">Warehouse name</label>
+            <input id="name" name="name" type="text" maxlength="80" placeholder="e.g. Main storage" required>
+          </div>
+          <div class="field capacity-field">
+            <label for="capacity">Capacity</label>
+            <input id="capacity" name="capacity" type="number" min="0.01" step="any" placeholder="e.g. 100" required>
+          </div>
+          <button class="create-button" type="submit">Create warehouse <span aria-hidden="true">→</span></button>
+        </form>
+      </section>
+      <footer>Warehouse Manager <span>·</span> Stock made simple</footer>
+    </main>
+  </body>
+</html>
