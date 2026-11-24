@@ -45,7 +45,12 @@
                   <p class="eyebrow">WAREHOUSE {{ "%02d"|format(warehouse.id) }}</p>
                   <h3>{{ warehouse.name }}</h3>
                 </div>
-                <span class="status-dot" aria-label="Active"></span>
+                <div class="card-heading-actions">
+                  <span class="status-dot" aria-label="Active"></span>
+                  <form action="{{ url_for('delete_warehouse', warehouse_id=warehouse.id) }}" method="post">
+                    <button class="delete-button" type="submit" aria-label="Remove {{ warehouse.name }}" title="Remove warehouse">Remove</button>
+                  </form>
+                </div>
               </div>
 
               <div class="stock-summary">

@@ -49,3 +49,12 @@ def remove_stock(warehouse_id, amount):
         follow_redirects=True,
     )
     return response.get_data(as_text=True)
+
+
+def delete_warehouse(warehouse_id):
+    """Delete a warehouse through its public form endpoint."""
+    response = _client.post(
+        f"/warehouses/{warehouse_id}/delete",
+        follow_redirects=True,
+    )
+    return response.get_data(as_text=True)

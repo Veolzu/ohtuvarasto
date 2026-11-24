@@ -41,6 +41,8 @@ h2 { margin-bottom: 0; font-size: 23px; letter-spacing: -.035em; }
 .warehouse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
 .warehouse-card { padding: 22px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); box-shadow: 0 3px 12px #1a34240a; }
 .card-heading { display: flex; align-items: start; justify-content: space-between; }
+.card-heading-actions { display: flex; align-items: center; gap: 13px; }
+.card-heading-actions form { margin: 0; }
 .card-heading .eyebrow { margin-bottom: 6px; color: #86938e; font-size: 9px; }
 h3 { margin: 0; font-size: 17px; letter-spacing: -.025em; }
 .status-dot { width: 9px; height: 9px; margin-top: 7px; border-radius: 50%; background: #58a982; box-shadow: 0 0 0 4px #e9f5ed; }
@@ -61,6 +63,8 @@ button { flex: 0 0 auto; min-height: 36px; padding: 0 12px; border: 0; border-ra
 button:hover { background: var(--green-dark); }
 .secondary-button { border: 1px solid #dfe6e1; background: white; color: #4c5b55; }
 .secondary-button:hover { background: #f0f4f1; color: var(--ink); }
+.delete-button { min-height: 29px; padding: 0 9px; border: 1px solid #eed8d2; background: #fff; color: #9a4936; font-size: 10px; }
+.delete-button:hover { border-color: #dfb8ae; background: #fff5f2; color: #803927; }
 .empty-state { padding: 35px 20px; border: 1px dashed #cad7ce; border-radius: 10px; background: #fbfdfb; text-align: center; }
 .empty-icon { display: grid; place-items: center; width: 38px; height: 38px; margin: 0 auto 12px; border-radius: 50%; background: #e9f3ec; color: var(--green); font-size: 23px; }
 .empty-state h3 { margin-bottom: 5px; }

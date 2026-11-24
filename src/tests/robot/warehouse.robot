@@ -37,3 +37,19 @@ Invalid Warehouse Input Is Rejected
     ${page}=    Create Warehouse    ${EMPTY}    0
     Should Contain    ${page}    Enter a name for the warehouse.
     Should Contain    ${page}    No warehouses yet
+
+Remove Warehouse
+    ${page}=    Create Warehouse    Old depot    100
+    ${page}=    Create Warehouse    Cold room    40
+    ${page}=    Delete Warehouse    1
+    Should Not Contain    ${page}    Old depot
+    Should Contain    ${page}    Cold room
+
+New Warehouse After Removal Gets A New Identifier
+    ${page}=    Create Warehouse    First store    100
+    ${page}=    Create Warehouse    Second store    40
+    ${page}=    Delete Warehouse    1
+    ${page}=    Create Warehouse    Third store    20
+    Should Contain    ${page}    Second store
+    Should Contain    ${page}    Third store
+    Should Contain    ${page}    /warehouses/3/delete

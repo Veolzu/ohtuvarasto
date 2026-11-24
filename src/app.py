@@ -38,11 +38,26 @@ def create_app():  # pylint: disable=too-many-statements
         else:
             warehouses = application.config["WAREHOUSES"]
             warehouses.append({
-                "id": len(warehouses) + 1,
+                "id": max((item["id"] for item in warehouses), default=0) + 1,
                 "name": name,
                 "stock": Varasto(capacity),
             })
             flash(f"Warehouse {name} was created.", "success")
+
+        return redirect(url_for("index"))
+
+    @application.post("/warehouses/<int:warehouse_id>/delete")
+    def delete_warehouse(warehouse_id):
+        warehouses = application.config["WAREHOUSES"]
+        warehouse = next(
+            (item for item in warehouses if item["id"] == warehouse_id),
+            None,
+        )
+        if warehouse is None:
+            flash("Warehouse not found.", "error")
+        else:
+            warehouses.remove(warehouse)
+            flash("Warehouse was removed.", "success")
 
         return redirect(url_for("index"))
 
