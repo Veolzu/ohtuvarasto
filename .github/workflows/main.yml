@@ -18,6 +18,8 @@ jobs:
         run: uv sync
       - name: Run tests
         run: uv run coverage run --branch -m pytest
+      - name: Run Robot Framework tests
+        run: uv run robot src/tests/robot
       - name: Lint
         run: uv run pylint src
       - name: Coverage report
@@ -26,7 +28,5 @@ jobs:
         uses: codecov/codecov-action@v5
         env:
           CODECOV_TOKEN: ${{ secrets.CODEDOV_TOKEN }}
-
-
 
 
